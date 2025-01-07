@@ -9,13 +9,11 @@ import java.util.Properties;
 
 public class DatabaseConfig {
 
-    // Variáveis para armazenar as configurações do banco de dados
     private static String url;
     private static String username;
     private static String password;
 
     static {
-        // Carregar as propriedades do arquivo application.properties
         try (InputStream input = DatabaseConfig.class.getClassLoader().getResourceAsStream("application.properties")) {
             if (input == null) {
                 System.out.println("Desculpe, não foi possível encontrar o arquivo 'application.properties'.");
@@ -33,7 +31,6 @@ public class DatabaseConfig {
         }
     }
 
-    // Método para obter a conexão com o banco de dados
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
     }

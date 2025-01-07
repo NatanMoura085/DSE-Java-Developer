@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserRepository {
-
-    // Método para salvar um usuário no banco de dados
     public void save(User user) {
         String sql = "INSERT INTO users (name, email, address, phone, isAdmin) VALUES (?, ?, ?, ?, ?)";
 
@@ -20,9 +18,9 @@ public class UserRepository {
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getAddress());
             statement.setString(4, user.getPhone());
-            statement.setBoolean(5, user.isAdmin());  // Garantindo que o valor de isAdmin seja salvo
+            statement.setBoolean(5, user.isAdmin());
 
-            statement.executeUpdate(); // Executa a inserção
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

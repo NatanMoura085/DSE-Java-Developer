@@ -1,19 +1,41 @@
 package org.example.domain.DAO;
 
 import org.example.domain.model.Plant;
+import org.example.infrastructure.DatabaseConfig;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class PlantDAO {
 
-    private final String url = "jdbc:postgresql://localhost:5432/teste";
-    private final String user = "postgres";
-    private final String password = "root";
+    private static String url;
+    private static String username;
+    private static String password;
+
+    static {
+        try (InputStream input = DatabaseConfig.class.getClassLoader().getResourceAsStream("application.properties")) {
+            if (input == null) {
+                System.out.println("Desculpe, não foi possível encontrar o arquivo 'application.properties'.");
+
+            }
+
+            Properties properties = new Properties();
+            properties.load(input);
+
+            url = properties.getProperty("db.url");
+            username = properties.getProperty("db.username");
+            password = properties.getProperty("db.password");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public Connection connect() throws SQLException {
-        return DriverManager.getConnection(url, user, password);
+        return DriverManager.getConnection(url, username, password);
     }
 
     public void insertPlant(Plant plant) throws SQLException {

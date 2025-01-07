@@ -1,0 +1,14 @@
+[
+  {
+    "input": "abc",
+    "expectedAnagrams": ["abc", "acb", "bac", "bca", "cab", "cba"]
+  },
+  {
+    "input": "",
+    "expectedAnagrams": []
+  },
+  {
+    "input": "a",
+    "expectedAnagrams": ["a"]
+  }
+]
